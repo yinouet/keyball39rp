@@ -14,9 +14,10 @@ RGBLIGHT_ENABLE = no        # Enable RGBLIGHT
 # RGBLIGHT_DRIVER = WS2812
 RGB_MATRIX_ENABLE = no      # Enable RGB_MATRIX (not work yet)
 # RGB_MATRIX_DRIVER = WS2812
-
-#
 WS2812_DRIVER = vendor
+
+# Do not enable VIA_ENABLE. This firmware doesn't support EEPROM emulation
+VIA_ENABLE = no
 
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
