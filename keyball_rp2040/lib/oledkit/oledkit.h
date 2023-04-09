@@ -1,5 +1,6 @@
 /*
-Copyright 2021 @yinouet
+Copyright 2021 @Yowkees
+Copyright 2021 MURAOKA Taro (aka KoRoN, @kaoriya)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -15,6 +16,19 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include QMK_KEYBOARD_H
+#pragma once
 
-// #include "i2c_master.h"
+#if defined(OLED_ENABLE) && !defined(OLEDKIT_DISABLE)
+
+// oledkit_render_info_user renders keyboard's internal state information to
+// primary board. A keymap can override this by defining a function with same
+// signature.
+//
+// It render a logo as default.
+void oledkit_render_info_user(void);
+
+// oledkit_render_logo_user renders a logo of keyboard to secondary board.
+// A keymap can override this by defining a function with same signature.
+void oledkit_render_logo_user(void);
+
+#endif // OLED_ENABLE
