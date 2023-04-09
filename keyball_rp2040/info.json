@@ -1,6 +1,6 @@
 {
-    "manufacturer": "yinouet",
-    "keyboard_name": "keyball_rp",
+    "manufacturer": "Yowkees",
+    "keyboard_name": "keyball39_rp",
     "maintainer": "yinouet",
     "bootloader": "rp2040",
     "diode_direction": "COL2ROW",
@@ -19,9 +19,9 @@
     "processor": "RP2040",
     "url": "",
     "usb": {
-        "device_version": "0.0.1",
-        "pid": "0x0200",
-        "vid": "0x5957"
+        "vid": "0x5957",
+        "pid": "0x0201",
+        "device_version": "0.0.1"
     },
     "split": {
         "enabled": true,
