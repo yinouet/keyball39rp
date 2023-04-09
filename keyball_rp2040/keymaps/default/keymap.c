@@ -12,7 +12,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LCTL  , KC_LGUI  , KC_LALT  ,LSFT_T(KC_LANG2),LT(1,KC_SPC),LT(3,KC_LANG1),KC_BSPC,LT(2,KC_ENT),LSFT_T(KC_LANG2),KC_RALT,KC_RGUI, KC_RSFT
+    KC_LCTL  , KC_LGUI  , KC_LALT  ,LSFT_T(KC_LNG2),LT(1,KC_SPC),LT(3,KC_LNG1),KC_BSPC,LT(2,KC_ENT),LSFT_T(KC_LNG2),KC_RALT,KC_RGUI, KC_RSFT
   ),
 
   [1] = LAYOUT_universal(
@@ -31,18 +31,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [3] = LAYOUT_universal(
     RGB_TOG  , _______  , _______  , _______  , _______  ,                            RGB_M_P  , RGB_M_B  , RGB_M_R  , RGB_M_SW , RGB_M_SN ,
-    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , SCRL_DVI ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
-    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , SCRL_DVD ,                            CPI_D1K  , CPI_D100 , CPI_I100 , CPI_I1K  , KBC_SAVE ,
-    RESET    , KBC_RST  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , KBC_RST  , RESET
+    RGB_MOD  , RGB_HUI  , RGB_SAI  , RGB_VAI  , _______  ,                            RGB_M_K  , RGB_M_X  , RGB_M_G  , RGB_M_T  , RGB_M_TW ,
+    RGB_RMOD , RGB_HUD  , RGB_SAD  , RGB_VAD  , _______  ,                            _______  , _______  , _______  , _______  , _______  ,
+    QK_BOOT  , _______  , _______  , _______  , _______  , _______  ,      _______ ,  _______  , _______  , _______  , _______  , QK_BOOT
   ),
 };
 // clang-format on
 
+#ifndef RGBLIGHT_ENABLE
 layer_state_t layer_state_set_user(layer_state_t state) {
     // Auto enable scroll mode when the highest layer is 3
     keyball_set_scroll_mode(get_highest_layer(state) == 3);
     return state;
 }
+#endif
 
 #ifdef OLED_ENABLE
 
@@ -59,8 +61,11 @@ void oledkit_render_info_user(void) {
 
 layer_state_t layer_state_set_user(layer_state_t state) {
 
+    // Auto enable scroll mode when the highest layer is 3
+    // keyball_set_scroll_mode(get_highest_layer(state) == 3);
+
     // This line must be here so tri_layer_state RGB works correctly
-    state = update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
+    state = update_tri_layer_state(state, 1, 2, 3);
 
     uint8_t layer = biton32(state);
     switch (layer) {

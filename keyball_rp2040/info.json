@@ -1,6 +1,6 @@
 {
     "manufacturer": "Yowkees",
-    "keyboard_name": "keyball39_rp",
+    "keyboard_name": "keyball39_rp2040",
     "maintainer": "yinouet",
     "bootloader": "rp2040",
     "diode_direction": "COL2ROW",
