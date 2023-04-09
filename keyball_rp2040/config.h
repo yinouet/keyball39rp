@@ -21,6 +21,9 @@
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
 
+// For debugging
+#define POINTING_DEVICE_DEBUG
+
 /* SPI & PMW3360 settings. */
 #define SPI_DRIVER SPID0
 #define SPI_SCK_PIN GP22
