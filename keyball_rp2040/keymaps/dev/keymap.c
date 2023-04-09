@@ -12,7 +12,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_Q     , KC_W     , KC_E     , KC_R     , KC_T     ,                            KC_Y     , KC_U     , KC_I     , KC_O     , KC_P     ,
     KC_A     , KC_S     , KC_D     , KC_F     , KC_G     ,                            KC_H     , KC_J     , KC_K     , KC_L     , KC_MINS  ,
     KC_Z     , KC_X     , KC_C     , KC_V     , KC_B     ,                            KC_N     , KC_M     , KC_COMM  , KC_DOT   , KC_SLSH  ,
-    KC_LCTL  , KC_LGUI  , KC_LALT  , MO(2)    , KC_SPC   , KC_BTN1  ,      KC_BSPC ,  MO(2)                                     , KC_RSFT
+    KC_LCTL  , KC_LGUI  , KC_LALT  , MO(2)    , KC_SPC   , KC_BTN1  ,      KC_BSPC ,  MO(1)                                     , KC_RSFT
   ),
 
   [1] = LAYOUT(
@@ -38,16 +38,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-#ifndef RGBLIGHT_ENABLE
-layer_state_t layer_state_set_user(layer_state_t state) {
-    // Auto enable scroll mode when the highest layer is 3
-    keyball_set_scroll_mode(get_highest_layer(state) == 3);
+static bool scrolling_mode = false;
 
-    state = update_tri_layer_state(state, 1, 2, 3);
+// #ifndef RGBLIGHT_ENABLE
+// layer_state_t layer_state_set_user(layer_state_t state) {
+//     // Auto enable scroll mode when the highest layer is 3
+//     keyball_set_scroll_mode(get_highest_layer(state) == 3);
 
-    return state;
-}
-#endif
+//     state = update_tri_layer_state(state, 1, 2, 3);
+
+//     return state;
+// }
+// #endif
 
 #ifdef OLED_ENABLE
 
@@ -59,8 +61,7 @@ void oledkit_render_info_user(void) {
 }
 #endif
 
-// RGB layer settings
-#ifdef RGBLIGHT_ENABLE
+// layer actions
 
 layer_state_t layer_state_set_user(layer_state_t state) {
 
@@ -69,6 +70,19 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
     // This line must be here so tri_layer_state RGB works correctly
     state = update_tri_layer_state(state, 1, 2, 3);
+
+    switch (get_highest_layer(state)) {
+        case 2:  // If we're on the _RAISE layer enable scrolling mode
+            scrolling_mode = true;
+            pointing_device_set_cpi(1000);
+            break;
+        default:
+            if (scrolling_mode) {  // check if we were scrolling before and set disable if so
+                scrolling_mode = false;
+                pointing_device_set_cpi(100);
+            }
+            break;
+    }
 
     uint8_t layer = biton32(state);
     switch (layer) {
@@ -89,4 +103,13 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
-#endif
+
+report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
+    if (scrolling_mode) {
+        mouse_report.h = mouse_report.x;
+        mouse_report.v = -mouse_report.y;
+        mouse_report.x = 0;
+        mouse_report.y = 0;
+    }
+    return mouse_report;
+}
