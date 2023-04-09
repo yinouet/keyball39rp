@@ -1,4 +1,2 @@
 # RGBLIGHT_MATRIX = yes
 RGBLIGHT_ENABLE = yes
-
-OLED_ENABLE = yes

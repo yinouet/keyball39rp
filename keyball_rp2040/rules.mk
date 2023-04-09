@@ -22,7 +22,7 @@ VIA_ENABLE = no
 # Do not enable SLEEP_LED_ENABLE. it uses the same timer as BACKLIGHT_ENABLE
 SLEEP_LED_ENABLE = no       # Breathing sleep LED during USB suspend
 
-# To support OLED
+# To support OLED !!!NOT fully implemented yet!!!
 OLED_ENABLE = no                # Please Enable this in each keymaps.
 OLED_DRIVER     = SSD1306
 SRC += lib/oledkit/oledkit.c    # OLED utility for Keyball series.
