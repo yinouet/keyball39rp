@@ -38,7 +38,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-static bool scrolling_mode = false;
 
 // #ifndef RGBLIGHT_ENABLE
 // layer_state_t layer_state_set_user(layer_state_t state) {
@@ -71,19 +70,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     // This line must be here so tri_layer_state RGB works correctly
     state = update_tri_layer_state(state, 1, 2, 3);
 
-    switch (get_highest_layer(state)) {
-        case 2:  // If we're on the _RAISE layer enable scrolling mode
-            scrolling_mode = true;
-            pointing_device_set_cpi(1000);
-            break;
-        default:
-            if (scrolling_mode) {  // check if we were scrolling before and set disable if so
-                scrolling_mode = false;
-                pointing_device_set_cpi(100);
-            }
-            break;
-    }
-
     uint8_t layer = biton32(state);
     switch (layer) {
         case 0:
@@ -101,15 +87,4 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     }
 
     return state;
-}
-
-
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report) {
-    if (scrolling_mode) {
-        mouse_report.h = mouse_report.x;
-        mouse_report.v = -mouse_report.y;
-        mouse_report.x = 0;
-        mouse_report.y = 0;
-    }
-    return mouse_report;
 }
