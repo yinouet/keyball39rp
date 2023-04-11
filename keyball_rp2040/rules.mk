@@ -27,8 +27,11 @@ OLED_DRIVER     = SSD1306
 SRC += lib/oledkit/oledkit.c    # OLED utility for Keyball series.
 
 # Include common library
-# SRC += lib/keyball/keyball.c
+SRC += lib/keyball/keyball.c
 
 # Disable other features to squeeze firmware size
 SPACE_CADET_ENABLE = no
 MAGIC_ENABLE = no
+
+# For debugging
+# CONSOLE_ENABLE = yes

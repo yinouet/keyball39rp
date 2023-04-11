@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #pragma once
 
 #include "quantum.h"
+#include "lib/keyball/keyball.h"
 
 #undef RP_SPI_USE_SPI0
 #define RP_SPI_USE_SPI0 TRUE

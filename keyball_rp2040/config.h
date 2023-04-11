@@ -68,7 +68,7 @@
 #endif
 
 #ifndef OLED_FONT_H
-#    define OLED_FONT_H "keyboards/keyball_rp2040/lib/glcdfont.c"
+#    define OLED_FONT_H "keyboards/keyball39_rp2040/lib/glcdfont.c"
 #endif
 
 #ifdef OLED_ENABLE
