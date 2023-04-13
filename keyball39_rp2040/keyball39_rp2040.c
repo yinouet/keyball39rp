@@ -17,10 +17,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#include "lib/keyball/keyball.h"
+// #include "lib/keyball/keyball.h"
 
 // #include "i2c_master.h"
-
+/*
 static bool scrolling_mode = false;
 
 layer_state_t layer_state_set_kb(layer_state_t state) {
@@ -53,3 +53,4 @@ layer_state_t layer_state_set_kb(layer_state_t state) {
     }
     return mouse_report;
 }
+*/

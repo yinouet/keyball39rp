@@ -73,8 +73,8 @@
 
 #ifdef OLED_ENABLE
 #define     I2C_DRIVER I2CD1
-#define     I2C1_SDA_PIN GP4
-#define     I2C1_SCL_PIN GP5
+#define     I2C1_SDA_PIN GP2
+#define     I2C1_SCL_PIN GP3
 #endif
 
 #if !defined(LAYER_STATE_8BIT) && !defined(LAYER_STATE_16BIT) && !defined(LAYER_STATE_32BIT)
