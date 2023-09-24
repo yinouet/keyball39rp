@@ -1,2 +1,0 @@
-# RGBLIGHT_MATRIX = yes
-RGBLIGHT_ENABLE = yes
