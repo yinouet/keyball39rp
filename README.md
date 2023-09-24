@@ -9,7 +9,7 @@ Such as CPI change, ball scroll, scroll speeed change.
 
 TODOs
 - [x] RGB lightning
-- [ ] CPI adjust
-- [ ] Scroll mode
+- [x] CPI adjust
+- [x] Scroll mode
 - [ ] keyball keycodes
 - [ ] OLED
